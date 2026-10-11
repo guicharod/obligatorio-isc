@@ -1,4 +1,3 @@
-# Llama al módulo de red y le pasa los valores
 module "network" {
   source = "./modules/network"
 
@@ -12,4 +11,15 @@ module "network" {
   cidr_app_b     = var.cidr_app_b
   cidr_db_a      = var.cidr_db_a
   cidr_db_b      = var.cidr_db_b
+}
+
+module "security" {
+  source = "./modules/security"
+
+  nombreproyecto = var.nombreproyecto
+  vpc_id         = module.network.vpc_id # sale del output del módulo de red
+  vpc_cidr       = var.vpc_cidr
+  ip_admin       = var.ip_admin
+  puerto_app     = var.puerto_app
+  puerto_db      = var.puerto_db
 }
