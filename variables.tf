@@ -1,3 +1,7 @@
+# ---------------------------------------------------------------
+# modules/network
+# ---------------------------------------------------------------
+
 variable "nombreproyecto" {
   type    = string
   default = "obligatorio-isc"
@@ -48,4 +52,23 @@ variable "cidr_db_a" {
 variable "cidr_db_b" {
   type    = string
   default = "10.0.21.0/24"
+}
+
+# ---------------------------------------------------------------
+# modules/security
+# ---------------------------------------------------------------
+
+# IP pública desde donde se va a administrar.
+variable "ip_admin" {
+  type = string
+}
+
+variable "puerto_app" {
+  type    = number
+  default = 80
+}
+
+variable "puerto_db" {
+  type    = number
+  default = 3306
 }
