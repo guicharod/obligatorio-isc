@@ -4,7 +4,7 @@
 
 resource "aws_security_group" "sg-alb" {
   name        = "${var.nombreproyecto}-sg-alb"
-  description = "Load balancer: HTTP desde Internet"
+  description = "HTTP desde Internet"
   vpc_id      = var.vpc_id
 
   # Entrada: HTTP desde cualquier lado
@@ -34,7 +34,7 @@ resource "aws_security_group" "sg-alb" {
 
 resource "aws_security_group" "sg-bastion" {
   name        = "${var.nombreproyecto}-sg-bastion"
-  description = "Bastion: SSH solo desde la IP del administrador"
+  description = "SSH solo desde la IP del administrador"
   vpc_id      = var.vpc_id
 
   # Entrada: SSH solo desde mi IP
@@ -64,7 +64,7 @@ resource "aws_security_group" "sg-bastion" {
 
 resource "aws_security_group" "sg-app" {
   name        = "${var.nombreproyecto}-sg-app"
-  description = "App: trafico solo desde el load balancer y SSH desde el bastion"
+  description = "Ingreso solo desde el load balancer y SSH desde el bastion"
   vpc_id      = var.vpc_id
 
   # Entrada: Desde el load balancer
@@ -115,6 +115,7 @@ resource "aws_security_group" "sg-app" {
 # ---------------------------------------------------------------
 
 resource "aws_security_group" "sg-db" {
+    description = "Solo desde los servidores de app"
   name   = "${var.nombreproyecto}-sg-db"
   vpc_id = var.vpc_id
 
