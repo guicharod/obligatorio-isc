@@ -30,7 +30,6 @@ variable "cidr_app_b" {
   type = string
 }
 
-# Rangos de las subredes de datos
 variable "cidr_db_a" {
   type = string
 }
