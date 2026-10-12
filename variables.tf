@@ -72,3 +72,32 @@ variable "puerto_db" {
   type    = number
   default = 3306
 }
+
+# ---------------------------------------------------------------
+# modules/compute
+# ---------------------------------------------------------------
+
+variable "instance_type" {
+  type    = string
+  default = "t3.micro"
+}
+
+variable "key_name" {
+  type    = string
+  default = "vockey"
+}
+
+variable "asg_min" {
+  type    = number
+  default = 2
+}
+
+variable "asg_deseado" {
+  type    = number
+  default = 2
+}
+
+variable "asg_max" {
+  type    = number
+  default = 4
+}
