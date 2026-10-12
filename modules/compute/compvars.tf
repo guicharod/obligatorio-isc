@@ -24,7 +24,6 @@ variable "sn_public_b_id" {
   type = string
 }
 
-
 # Security groups de los servidores y del bastion
 variable "sg_app_id" {
   type = string

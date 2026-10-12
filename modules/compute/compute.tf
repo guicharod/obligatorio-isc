@@ -58,7 +58,7 @@ data "aws_ami" "al2023" {
 }
 
 # ---------------------------------------------------------------
-# Servidores de aplicación
+# ASG con Servidores de aplicación
 # ---------------------------------------------------------------
 
 # Parametros de cada servidor de app que crea el Auto Scaling Group
@@ -115,6 +115,18 @@ resource "aws_autoscaling_policy" "policy-cpu" {
   }
 }
 
+# Busca las instancias que creó el ASG, para mostrar sus IPs privadas
+data "aws_instances" "app" {
+  instance_tags = {
+    Name = "${var.nombreproyecto}-app"
+  }
+# Toma solo las instancias que están corriendo
+  instance_state_names = ["running"]
+
+  # Espera a que el ASG exista y haya lanzado las instancias
+  depends_on = [aws_autoscaling_group.asg-app]
+}
+
 # ---------------------------------------------------------------
 # Bastion
 # ---------------------------------------------------------------
@@ -131,3 +143,4 @@ resource "aws_instance" "bastion" {
     Name = "${var.nombreproyecto}-bastion"
   }
 }
+

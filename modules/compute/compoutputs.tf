@@ -7,3 +7,8 @@ output "bastion_ip" {
 output "alb_dns_name" {
   value = aws_lb.alb.dns_name
 }
+
+# IPs privadas de los servidores de app
+output "app_private_ips" {
+  value = data.aws_instances.app.private_ips
+}
