@@ -120,7 +120,7 @@ data "aws_instances" "app" {
   instance_tags = {
     Name = "${var.nombreproyecto}-app"
   }
-# Toma solo las instancias que están corriendo
+  # Toma solo las instancias que están corriendo
   instance_state_names = ["running"]
 
   # Espera a que el ASG exista y haya lanzado las instancias

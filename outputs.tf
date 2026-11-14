@@ -12,3 +12,8 @@ output "url_sitio" {
 output "ips_privadas_app" {
   value = module.compute.app_private_ips
 }
+
+# Endpoint de la base de datos
+output "db_endpoint" {
+  value = module.database.db_endpoint
+}

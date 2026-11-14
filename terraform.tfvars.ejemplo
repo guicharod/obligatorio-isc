@@ -1,1 +1,2 @@
 ip_admin = "x.x.x.x/32"
+db_password = "CambiarEstaClave"

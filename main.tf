@@ -1,3 +1,4 @@
+# Llama al módulo de network
 module "network" {
   source = "./modules/network"
 
@@ -13,6 +14,7 @@ module "network" {
   cidr_db_b      = var.cidr_db_b
 }
 
+# Llama al módulo de security
 module "security" {
   source = "./modules/security"
 
@@ -24,6 +26,7 @@ module "security" {
   puerto_db      = var.puerto_db
 }
 
+# Llama al módulo de compute
 module "compute" {
   source = "./modules/compute"
 
@@ -42,4 +45,19 @@ module "compute" {
   asg_min        = var.asg_min
   asg_deseado    = var.asg_deseado
   asg_max        = var.asg_max
+}
+
+# Llama al módulo de base de datos
+module "database" {
+  source = "./modules/database"
+
+  nombreproyecto         = var.nombreproyecto
+  sn_db_a_id             = module.network.sn_db_a_id
+  sn_db_b_id             = module.network.sn_db_b_id
+  sg_db_id               = module.security.sg_db_id
+  db_instance_class      = var.db_instance_class
+  db_nombre              = var.db_nombre
+  db_usuario             = var.db_usuario
+  db_password            = var.db_password
+  db_skip_final_snapshot = var.db_skip_final_snapshot
 }
