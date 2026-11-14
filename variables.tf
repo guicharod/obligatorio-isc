@@ -101,3 +101,38 @@ variable "asg_max" {
   type    = number
   default = 4
 }
+
+# ---------------------------------------------------------------
+# modules/database
+# ---------------------------------------------------------------
+
+variable "db_instance_class" {
+  type    = string
+  default = "db.t3.micro"
+}
+
+variable "db_nombre" {
+  type    = string
+  default = "bdoblig"
+}
+
+variable "db_usuario" {
+  type    = string
+  default = "admin"
+}
+
+# Sin default: va en terraform.tfvars
+variable "db_password" {
+  type      = string
+  sensitive = true
+}
+
+variable "db_skip_final_snapshot" {
+  type    = bool
+  default = true
+}
+
+variable "db_backup_retencion" {
+  type    = number
+  default = 7
+}

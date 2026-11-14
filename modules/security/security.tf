@@ -115,9 +115,9 @@ resource "aws_security_group" "sg-app" {
 # ---------------------------------------------------------------
 
 resource "aws_security_group" "sg-db" {
-  name   = "${var.nombreproyecto}-sg-db"
+  name        = "${var.nombreproyecto}-sg-db"
   description = "Solo desde los servidores de app"
-  vpc_id = var.vpc_id
+  vpc_id      = var.vpc_id
 
   # Entrada: solo desde los servidores de app
   ingress {
