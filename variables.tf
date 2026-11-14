@@ -136,3 +136,17 @@ variable "db_backup_retencion" {
   type    = number
   default = 7
 }
+
+# ---------------------------------------------------------------
+# modules/monitoring
+# ---------------------------------------------------------------
+
+variable "region" {
+  type    = string
+  default = "us-east-1"
+}
+
+# Mail que recibe las alertas. Sin default: va en terraform.tfvars
+variable "email_alertas" {
+  type = string
+}

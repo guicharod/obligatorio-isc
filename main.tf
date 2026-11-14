@@ -62,3 +62,16 @@ module "database" {
   db_skip_final_snapshot = var.db_skip_final_snapshot
   db_backup_retencion    = var.db_backup_retencion
 }
+
+# Llama al módulo de monitoreo
+module "monitoring" {
+  source = "./modules/monitoring"
+
+  nombreproyecto = var.nombreproyecto
+  region         = var.region
+  email_alertas  = var.email_alertas
+  alb_arn_suffix = module.compute.alb_arn_suffix
+  tg_arn_suffix  = module.compute.tg_arn_suffix
+  asg_name       = module.compute.asg_name
+  db_identifier  = module.database.db_identifier
+}

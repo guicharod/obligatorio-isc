@@ -12,3 +12,15 @@ output "alb_dns_name" {
 output "app_private_ips" {
   value = data.aws_instances.app.private_ips
 }
+# Identificadores que usan las métricas de CloudWatch
+output "alb_arn_suffix" {
+  value = aws_lb.alb.arn_suffix
+}
+
+output "tg_arn_suffix" {
+  value = aws_lb_target_group.tg-app.arn_suffix
+}
+
+output "asg_name" {
+  value = aws_autoscaling_group.asg-app.name
+}

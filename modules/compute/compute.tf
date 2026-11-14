@@ -75,6 +75,10 @@ resource "aws_launch_template" "lt-app" {
   tags = {
     Name = "${var.nombreproyecto}-lt-app"
   }
+  # Métricas
+  monitoring {
+    enabled = true
+  }
 }
 
 # Mantiene entre asg_min y asg_max servidores, repartidos en las dos AZ
@@ -99,6 +103,8 @@ resource "aws_autoscaling_group" "asg-app" {
     value               = "${var.nombreproyecto}-app"
     propagate_at_launch = true
   }
+  # Publica en CloudWatch la cantidad de instancias del grupo (dashboard)
+  enabled_metrics = ["GroupInServiceInstances", "GroupDesiredCapacity"]
 }
 
 # Agrega o quita servidores para mantener la CPU promedio en 50 %
