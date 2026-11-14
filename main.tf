@@ -60,4 +60,5 @@ module "database" {
   db_usuario             = var.db_usuario
   db_password            = var.db_password
   db_skip_final_snapshot = var.db_skip_final_snapshot
+  db_backup_retencion    = var.db_backup_retencion
 }

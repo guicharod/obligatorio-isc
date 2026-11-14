@@ -41,3 +41,8 @@ variable "db_password" {
 variable "db_skip_final_snapshot" {
   type = bool
 }
+
+# Días que se conservan los backups automáticos (1 a 35)
+variable "db_backup_retencion" {
+  type = number
+}

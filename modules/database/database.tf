@@ -34,8 +34,19 @@ resource "aws_db_instance" "db" {
   vpc_security_group_ids = [var.sg_db_id]
   publicly_accessible    = false # sin IP pública
 
-  # Al hacer destroy: true = borra sin snapshot (desarrollo)
-  skip_final_snapshot = var.db_skip_final_snapshot
+  # ---------------- Respaldos ----------------
+
+  # Backups automáticos: copia diaria + logs de transacciones, conservados N días
+  backup_retention_period = var.db_backup_retencion
+  backup_window           = "03:00-04:00"         # UTC; en Multi-AZ se toma de la standby
+  maintenance_window      = "sun:05:00-sun:06:00" # UTC; no puede superponerse con el backup
+
+  # Los snapshots heredan los tags de la base
+  copy_tags_to_snapshot = true
+
+  # Al hacer destroy: true = borra sin snapshot (desarrollo); false = guarda el final snapshot
+  skip_final_snapshot       = var.db_skip_final_snapshot
+  final_snapshot_identifier = "${var.nombreproyecto}-db-final"
 
   tags = {
     Name = "${var.nombreproyecto}-db"

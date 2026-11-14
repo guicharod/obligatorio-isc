@@ -131,3 +131,8 @@ variable "db_skip_final_snapshot" {
   type    = bool
   default = true
 }
+
+variable "db_backup_retencion" {
+  type    = number
+  default = 7
+}
