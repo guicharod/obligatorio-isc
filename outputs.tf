@@ -17,3 +17,8 @@ output "ips_privadas_app" {
 output "db_endpoint" {
   value = module.database.db_endpoint
 }
+
+# Link al dashboard de CloudWatch
+output "url_dashboard" {
+  value = module.monitoring.dashboard_url
+}
