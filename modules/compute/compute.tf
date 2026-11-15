@@ -15,17 +15,27 @@ resource "aws_lb" "alb" {
   }
 }
 
-# Grupo de servidores de app que reciben el tráfico
+
 resource "aws_lb_target_group" "tg-app" {
   name     = "${var.nombreproyecto}-tg-app"
   port     = var.puerto_app
   protocol = "HTTP"
   vpc_id   = var.vpc_id
 
+  # Consulta cada 10 s una página que no depende de la base. 2 fallas seguidas = unhealthy
+  health_check {
+    path                = "/health.html"
+    interval            = 10
+    healthy_threshold   = 2
+    unhealthy_threshold = 2
+  }
+
   tags = {
     Name = "${var.nombreproyecto}-tg-app"
   }
 }
+
+
 
 # Escucha en el puerto 80 y reenvía al grupo de servidores
 resource "aws_lb_listener" "listener-http" {
@@ -69,8 +79,15 @@ resource "aws_launch_template" "lt-app" {
   key_name               = var.key_name
   vpc_security_group_ids = [var.sg_app_id]
 
-  # Script que corre al arrancar
-  user_data = base64encode(file("${path.module}/userdata.sh"))
+  # Script de arranque: datos de la base y de dónde descargar la app
+  user_data = base64encode(templatefile("${path.module}/userdata.tpl", {
+    db_endpoint  = var.db_endpoint
+    db_nombre    = var.db_nombre
+    db_usuario   = var.db_usuario
+    db_password  = var.db_password
+    app_repo_url = var.app_repo_url
+    app_branch   = var.app_branch
+  }))
 
   tags = {
     Name = "${var.nombreproyecto}-lt-app"
@@ -94,7 +111,7 @@ resource "aws_autoscaling_group" "asg-app" {
 
   launch_template {
     id      = aws_launch_template.lt-app.id
-    version = "$Latest"
+    version = aws_launch_template.lt-app.latest_version # cambia cada vez que se modifica el template
   }
 
   # Nombre de las instancias que crea el ASG
@@ -149,4 +166,3 @@ resource "aws_instance" "bastion" {
     Name = "${var.nombreproyecto}-bastion"
   }
 }
-

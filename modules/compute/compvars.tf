@@ -65,3 +65,30 @@ variable "asg_deseado" {
 variable "asg_max" {
   type = number
 }
+
+# Datos de la base que usa la aplicación
+variable "db_endpoint" {
+  type = string
+}
+
+variable "db_nombre" {
+  type = string
+}
+
+variable "db_usuario" {
+  type = string
+}
+
+variable "db_password" {
+  type      = string
+  sensitive = true
+}
+
+# Repositorio y rama de donde se descarga la aplicación
+variable "app_repo_url" {
+  type = string
+}
+
+variable "app_branch" {
+  type = string
+}

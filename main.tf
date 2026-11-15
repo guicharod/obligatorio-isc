@@ -45,6 +45,12 @@ module "compute" {
   asg_min        = var.asg_min
   asg_deseado    = var.asg_deseado
   asg_max        = var.asg_max
+  db_endpoint    = module.database.db_endpoint
+  db_nombre      = var.db_nombre
+  db_usuario     = var.db_usuario
+  db_password    = var.db_password
+  app_repo_url   = var.app_repo_url
+  app_branch     = var.app_branch
 }
 
 # Llama al módulo de base de datos
