@@ -11,7 +11,7 @@
 
 Analista en Infraestructura Informática · ORT Uruguay · Guillermo Chaves · Diciembre 2026
 
-<img src="docs/arquitectura-simple.drawio.svg" alt="Diagrama de arquitectura" width="85%">
+<img src="files/arquitectura-simple.drawio.svg" alt="Diagrama de arquitectura" width="85%">
 
 </div>
 
@@ -39,11 +39,13 @@ Analista en Infraestructura Informática · ORT Uruguay · Guillermo Chaves · D
 
 Un e-commerce de remeras para gente que vive en la terminal, con estética de consola. Está escrito en PHP, corre sobre Apache en los servidores de aplicación y guarda productos y pedidos en la base de datos RDS.
 
+<img src="files/tienda.jpg" alt="Diagrama de arquitectura" width="85%">
+
 - **Barra de estado** al pie: instancia y AZ que respondió, estado de la base y latencia.
 - **Log de pedidos:** cada compra registra qué instancia y qué AZ la atendió.
 - **Stock en vivo:** la compra descuenta stock dentro de una transacción.
 
-Los servidores descargan la aplicación (`app/`) desde este repositorio al arrancar. Detalle en [docs/arquitectura.md](docs/arquitectura.md#aplicación).
+Los servidores descargan la aplicación (`app/`) desde este repositorio al arrancar. Detalle en [arquitectura.md](arquitectura.md#aplicación).
 
 ## Cumplimiento de requisitos
 
@@ -63,7 +65,7 @@ La solución se organiza en tres capas, repartidas en dos zonas de disponibilida
 - **Aplicación (subredes privadas):** servidores de la tienda en un Auto Scaling Group, sin IP pública.
 - **Persistencia (subredes de datos):** base de datos RDS MySQL Multi-AZ, sin ruta a Internet.
 
-Detalle completo (direccionamiento, reglas de firewall, base de datos, respaldos, monitoreo y aplicación) en [docs/arquitectura.md](docs/arquitectura.md).
+Detalle completo (direccionamiento, reglas de firewall, base de datos, respaldos, monitoreo y aplicación) en [arquitectura.md](arquitectura.md).
 
 ## Servicios de AWS usados
 
@@ -94,25 +96,28 @@ Software en los servidores (lo instala el user-data): Amazon Linux 2023, Apache,
 
 ```
 obligatorio-isc/
-├── README.md                   Esta documentación
-├── providers.tf                Versiones de Terraform y del provider, región
-├── main.tf                     Llamada a los módulos y conexión entre ellos
-├── variables.tf                Variables de la raíz con sus valores por defecto
-├── outputs.tf                  Datos que se muestran al terminar el despliegue
-├── terraform.tfvars.ejemplo    Plantilla de los valores necesarios
-├── .gitignore                  Excluye estado, .terraform/, tfvars y claves
-├── app/                        Aplicación web (la descargan los servidores al arrancar)
-│   ├── index.php               Tienda: catálogo, compras y log de pedidos
-│   └── img/                    Imágenes de los productos
-├── docs/
-│   ├── arquitectura.md         Detalle técnico de la infraestructura
-│   └── arquitectura.drawio.svg Diagrama de arquitectura
+├── README.md                            Esta documentación
+├── arquitectura.md                      Detalle técnico de la infraestructura
+├── providers.tf                         Versiones de Terraform y del provider, región
+├── main.tf                              Llamada a los módulos y conexión entre ellos
+├── variables.tf                         Variables de la raíz con sus valores por defecto
+├── outputs.tf                           Datos que se muestran al terminar el despliegue
+├── terraform.tfvars.ejemplo             Plantilla de los valores necesarios
+├── .gitignore                           Excluye estado, .terraform/, tfvars y claves
+├── .terraform.lock.hcl                  Versión exacta del provider
+├── app/                                 Aplicación web (la descargan los servidores al arrancar)
+│   ├── index.php                        Tienda: catálogo, compras y log de pedidos
+│   └── img/                             Imágenes de los productos
+├── files/                               Diagramas y capturas
+│   ├── arquitectura.drawio.svg          Diagrama de arquitectura (detallado)
+│   ├── arquitectura-simple.drawio.svg   Diagrama de arquitectura (simplificado)
+│   └── tienda.jpg                       Captura de la tienda
 └── modules/
-    ├── network/                VPC, subredes, Internet Gateway, NAT Gateways y ruteo
-    ├── security/               Security groups
-    ├── compute/                Load balancer, launch template, Auto Scaling Group, bastion y user-data
-    ├── database/               RDS MySQL Multi-AZ y respaldos
-    └── monitoring/             Alarmas, notificaciones y dashboard de CloudWatch
+    ├── network/                         VPC, subredes, Internet Gateway, NAT Gateways y ruteo
+    ├── security/                        Security groups
+    ├── compute/                         Load balancer, launch template, Auto Scaling Group, bastion y user-data
+    ├── database/                        RDS MySQL Multi-AZ y respaldos
+    └── monitoring/                      Alarmas, notificaciones y dashboard de CloudWatch
 ```
 
 Cada módulo tiene tres archivos (a excepción de compute.tf, que además incluye userdata.tpl, la plantilla del script de arranque): los recursos (`network.tf`), las variables que recibe (`netvars.tf`) y los datos que expone (`netoutputs.tf`). Los módulos se conectan a través de `main.tf`.

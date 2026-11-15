@@ -12,10 +12,13 @@ mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 // ---------------------------------------------------------------
 $catalogo = [
     1 => ['nombre' => 'This Guy Forks Shirt', 'descripcion' => 'Para quien hace fork de todo repo que encuentra', 'precio' => 22.00, 'stock' => 25, 'img' => ['ThisGuyForks-1.jpg', 'ThisGuyForks-2.jpg']],
-    2 => ['nombre' => 'There is no cloud Shirt', 'descripcion' => 'It is just someone else\'s computer', 'precio' => 20.00, 'stock' => 15, 'img' => ['thereisnocloud-1.png', 'thereisnocloud-2.jpg']],
-    3 => ['nombre' => "It's Not a Bug. It's a Feature Shirt", 'descripcion' => 'La respuesta oficial a cualquier reporte de error', 'precio' => 20.00, 'stock' => 4, 'img' => ['notabug-1.jpg', 'notabug-2.jpg']],
-    4 => ['nombre' => 'GitHub Shirt', 'descripcion' => 'Where forking is done', 'precio' => 22.00, 'stock' => 10, 'img' => ['GitHub-1.jpg', 'GitHub-2.jpg']],
-    5 => ['nombre' => 'Breaking Bugs Shirt', 'descripcion' => 'Say my name: debugger', 'precio' => 24.00, 'stock' => 8, 'img' => ['BreakingBugs-1.jpg', 'BreakingBugs-2.jpg']],
+    2 => ['nombre' => 'Picky Mug', 'descripcion' => 'Linux es amigable, solo elige bien a sus amigos', 'precio' => 22.00, 'stock' => 12, 'img' => ['picky-1.jpg', 'picky-2.jpg']],
+    3 => ['nombre' => 'There is no cloud Shirt', 'descripcion' => 'It is just someone else\'s computer', 'precio' => 20.00, 'stock' => 15, 'img' => ['thereisnocloud-1.png', 'thereisnocloud-2.jpg']],
+    4 => ['nombre' => 'It Works on My Machine Mug', 'descripcion' => 'Por eso existen los contenedores', 'precio' => 20.00, 'stock' => 3, 'img' => ['itworks-1.jpg', 'itworks-2.jpg']],
+    5 => ['nombre' => "It's Not a Bug. It's a Feature Shirt", 'descripcion' => 'La respuesta oficial a cualquier reporte de error', 'precio' => 20.00, 'stock' => 4, 'img' => ['notabug-1.jpg', 'notabug-2.jpg']],
+    6 => ['nombre' => 'Linux n Caffeine Mug', 'descripcion' => 'Los dos procesos que nunca se detienen', 'precio' => 24.00, 'stock' => 9, 'img' => ['linuxncafeine-1.jpg', 'linuxncafeine-2.jpg']],
+    7 => ['nombre' => 'GitHub Shirt', 'descripcion' => 'Where forking is done', 'precio' => 22.00, 'stock' => 10, 'img' => ['GitHub-1.jpg', 'GitHub-2.jpg']],
+    8 => ['nombre' => 'Breaking Bugs Shirt', 'descripcion' => 'Say my name: debugger', 'precio' => 24.00, 'stock' => 8, 'img' => ['BreakingBugs-1.jpg', 'BreakingBugs-2.jpg']],
 ];
 
 $error = '';
@@ -190,7 +193,7 @@ $compra = $_GET['compra'] ?? '';
   | | | / -_) ' \/ _` / _` | / _` / -_) | / _` | | ' \ || | '_ \/ -_)
   |_| |_\___|_||_\__,_\__,_| \__,_\___| |_\__,_| |_||_\_,_|_.__/\___|</pre>
         <h1 class="logo-movil">☁ tienda de la nube</h1>
-        <p class="lema">remeras para gente que vive en la terminal · envíos a todas las AZ <span class="cursor"></span></p>
+        <p class="lema">remeras y tazas para gente que vive en la terminal · envíos a todas las AZ <span class="cursor"></span></p>
 
         <?php if ($error): ?>
             <p class="error">✘ <?= e($error) ?></p>

@@ -4,7 +4,7 @@
 
 **Detalle técnico de la infraestructura en AWS**
 
-[← Volver al README](../README.md)
+[← Volver al README](README.md)
 </div>
 
 ## Contenido
@@ -22,7 +22,7 @@
 
 ## Diagrama
 
-![Arquitectura](arquitectura.drawio.svg)
+![Arquitectura](/files/arquitectura.drawio.svg)
 
 ---
 
