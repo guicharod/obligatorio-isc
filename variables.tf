@@ -150,3 +150,19 @@ variable "region" {
 variable "email_alertas" {
   type = string
 }
+
+# ---------------------------------------------------------------
+# Aplicación
+# ---------------------------------------------------------------
+
+# Repositorio público de donde los servidores descargan la app al arrancar
+variable "app_repo_url" {
+  type    = string
+  default = "https://github.com/guicharod/obligatorio-isc.git"
+}
+
+# Rama del repo con la versión de la app a desplegar
+variable "app_branch" {
+  type    = string
+  default = "main"
+}
