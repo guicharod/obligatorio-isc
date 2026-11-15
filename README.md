@@ -39,7 +39,7 @@ Analista en Infraestructura Informática · ORT Uruguay · Guillermo Chaves · D
 
 Un e-commerce de remeras para gente que vive en la terminal, con estética de consola. Está escrito en PHP, corre sobre Apache en los servidores de aplicación y guarda productos y pedidos en la base de datos RDS.
 
-<img src="files/tienda.jpg" alt="Diagrama de arquitectura" width="85%">
+<img src="files/tienda.jpg" alt="Tienda de la nube" width="85%">
 
 - **Barra de estado** al pie: instancia y AZ que respondió, estado de la base y latencia.
 - **Log de pedidos:** cada compra registra qué instancia y qué AZ la atendió.
